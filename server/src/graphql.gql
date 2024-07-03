@@ -1,0 +1,99 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  _id: ID!
+  email: String!
+  provider: String!
+  phone: String!
+  address: String!
+  name: String!
+}
+
+type Sneaker {
+  _id: ID!
+  name: String!
+  price: String!
+  image: String!
+  formatNumber: String!
+}
+
+type CartItem {
+  _id: ID!
+  name: String!
+  price: String!
+  image: String!
+  quantity: Float!
+}
+
+type Order {
+  _id: ID!
+  user: User!
+  amount: Float!
+  ship: Float!
+  phone: String!
+  address: String!
+  approve: Boolean!
+  orderPaypalID: String!
+  cart: [CartItem!]!
+}
+
+type TimeEffectType {
+  start: DateTime!
+  end: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Coupon {
+  _id: ID!
+  name: String!
+  discount: Float!
+  type: String!
+  condition: Float!
+  timeEffect: TimeEffectType!
+}
+
+input CartItemInput {
+  _id: ID!
+  name: String!
+  price: String!
+  image: String!
+  quantity: Float!
+}
+
+input TimeEffectTypeInput {
+  start: DateTime!
+  end: DateTime!
+}
+
+type Query {
+  sneakers: [Sneaker!]!
+  users: [User!]!
+  findUser(email: String!): User!
+  orders: [Order!]!
+  coupons: [Coupon!]!
+}
+
+type Mutation {
+  addUser(input: UserInput!): User!
+  addCoupon(input: CouponInput!): Coupon!
+}
+
+input UserInput {
+  name: String!
+  email: String!
+  provider: String!
+}
+
+input CouponInput {
+  name: String!
+  discount: Float!
+  type: String!
+  condition: Float!
+  timeEffect: TimeEffectTypeInput!
+}
