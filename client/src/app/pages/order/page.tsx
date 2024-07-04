@@ -16,28 +16,12 @@ import {
   cartDto,
   ExecuteOrderDto,
 } from "@/app/types/order";
-import { CouponType, CouponTypeList } from "@/app/types/coupon";
-import Coupon from "@/app/components/coupon/coupon";
+
 
 const Cart = () => {
   //INFO ORDER
   const [number, setNumber] = useState<string>("");
   const { data: session, status } = useSession();
-
-  //COUPON
-  const [couponsChoose, setCouponsChoose] = useState<CouponTypeList>([]);
-  const handleChooseCoupon = (cp: CouponType) => {
-    const checkExist = couponsChoose.find((ele: any) => ele._id === cp._id);
-    let newCoupons = [];
-    if (checkExist) {
-      newCoupons = couponsChoose.filter((ele) => ele._id !== cp._id);
-    } else {
-      newCoupons = [...couponsChoose, cp];
-    }
-    setCouponsChoose(newCoupons);
-  };
-
-  console.log("couponsChoose", couponsChoose);
 
   //ORDER
   const sneakerCart = useSelector((state: any) => state.order.list);
@@ -216,12 +200,7 @@ const Cart = () => {
                   number={number}
                   callbackPhone={(value: string) => setNumber(value)}
                 ></Phone>
-                <Coupon
-                  couponsChoose={couponsChoose}
-                  callbackCoupon={(value: CouponType) =>
-                    handleChooseCoupon(value)
-                  }
-                ></Coupon>
+              
                 <div className="flex flex-col justify-evenly text-base font-medium text-gray-900">
                   <div className="flex flex-row ">
                     <p className="w-72">Subtotal:</p>

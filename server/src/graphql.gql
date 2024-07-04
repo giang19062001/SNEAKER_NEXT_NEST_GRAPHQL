@@ -39,25 +39,6 @@ type Order {
   cart: [CartItem!]!
 }
 
-type TimeEffectType {
-  start: DateTime!
-  end: DateTime!
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-type Coupon {
-  _id: ID!
-  name: String!
-  discount: Float!
-  type: String!
-  condition: Float!
-  timeEffect: TimeEffectType!
-}
-
 input CartItemInput {
   _id: ID!
   name: String!
@@ -66,34 +47,19 @@ input CartItemInput {
   quantity: Float!
 }
 
-input TimeEffectTypeInput {
-  start: DateTime!
-  end: DateTime!
-}
-
 type Query {
   sneakers: [Sneaker!]!
   users: [User!]!
   findUser(email: String!): User!
   orders: [Order!]!
-  coupons: [Coupon!]!
 }
 
 type Mutation {
   addUser(input: UserInput!): User!
-  addCoupon(input: CouponInput!): Coupon!
 }
 
 input UserInput {
   name: String!
   email: String!
   provider: String!
-}
-
-input CouponInput {
-  name: String!
-  discount: Float!
-  type: String!
-  condition: Float!
-  timeEffect: TimeEffectTypeInput!
 }

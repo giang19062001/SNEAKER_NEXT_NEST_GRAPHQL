@@ -32,6 +32,6 @@ export default function RootLayout({
           </SessionProviders>
         </StoreProvider>
       </body>
-    </html>
+      </html>
   );
 }
