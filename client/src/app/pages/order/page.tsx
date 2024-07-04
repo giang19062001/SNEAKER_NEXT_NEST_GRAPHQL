@@ -140,6 +140,7 @@ const Cart = () => {
           travelMode: google.maps.TravelMode.DRIVING,
           //DRIVING ,BYCLCLING , WALKING , TRANSIT
         });
+        console.log(' destiantionRef',  results)
 
         setDirectionsResponse(results);
         setDistance(results.routes[0].legs[0].distance.text);
@@ -168,8 +169,8 @@ const Cart = () => {
 
   return (
     <LayoutUser>
-      <div className="container mx-auto flex justify-center items-center flex-wrap pt-4 pb-12 mt-32">
-        <div className="flex h-full flex-col bg-white border-2	w-full">
+      <div className="container mx-auto flex justify-center items-center flex-wrap pt-4 pb-12 mt-24">
+        <div className="flex h-full flex-col bg-white	w-full">
           <CartList></CartList>
           <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
             <div className="flex flex-col md:flex-row  justify-between gap-10 mt-6">

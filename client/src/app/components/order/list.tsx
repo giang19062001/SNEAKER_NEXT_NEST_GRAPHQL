@@ -1,7 +1,7 @@
 import { removeFromCart } from "@/app/redux/order/order.Slice";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import '../../assets/css/order.css'
 const CartList = () => {
   const sneakerCart = useSelector((state: any) => state.order.list);
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ const CartList = () => {
     dispatch(removeFromCart(_id));
   };
   return (
-    <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
+    <div  className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
       <div className="flex items-start justify-between">
         <h2 className="text-lg font-medium text-gray-900" id="slide-over-title">
           Shopping cart

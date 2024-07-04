@@ -9,8 +9,18 @@ export class OrderResolver {
   constructor(private readonly orderServices: OrderService) {}
 
   @Query(() => [Order], { name: 'orders' })
-  async users(): Promise<Order[]> {
+  async orders(): Promise<Order[]> {
     return this.orderServices.findAll();
   }
+  
+  @Query(() => [Order], { name: 'findOrderByUser' })
+  async findOrderByUser(@Args('userId') userId : string): Promise<Order[]> {
+    if(!userId){
+      return []
+    }
+    const data = await this.orderServices.findOrderByUser(userId);
+    console.log(data)
+    return data   
 
+  }
 }

@@ -4,9 +4,7 @@ import mongoose, { Document } from 'mongoose';
 import { User } from 'src/modules/user/schemas/user.schema';
 
 
-//VÌ VỪA LÀ DTO ==> InputType, VỪA LÀ TYPE ==> ObjectType
 @ObjectType('CartItem')
-@InputType('CartItemInput')
 export class CartItem{
   @Field(() => ID)
   _id: string;
@@ -43,6 +41,7 @@ export class OrderInput {
 
   @Field(() => [CartItem])
   cart: CartItem[];
+
 }
 
 
@@ -72,6 +71,11 @@ export class Order extends Document {
   @Prop({ required: true })
   address: string;
 
+  
+  @Field()
+  @Prop({ required: true, default: 0 })
+  status: number;
+
   @Field()
   @Prop({ required: false, default: false })
   approve: boolean;
@@ -95,6 +99,12 @@ export class Order extends Document {
     required: true,
   })
   cart: CartItem[];
+
+  @Field()
+  createdAt: string;
+
+  @Field()
+  updatedAt: string;
 }
 
 export const OrderSchema = SchemaFactory.createForClass(Order);

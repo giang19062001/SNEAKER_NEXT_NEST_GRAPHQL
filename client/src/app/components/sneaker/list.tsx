@@ -6,7 +6,8 @@ import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import { addToCart } from "@/app/redux/order/order.Slice";
 import { GET_SNEAKER } from "@/app/graphql/sneaker";
-import {  toast } from 'react-toastify';
+import { toast } from "react-toastify";
+import "../../assets/css/sneakers.css";
 
 const List = () => {
   const dispatch = useDispatch();
@@ -15,19 +16,19 @@ const List = () => {
 
   const AddToCartShop = (sneaker: any) => {
     dispatch(addToCart({ ...sneaker, quantity: 1 }));
-    toast.success('Added')
+    toast.success("Added");
   };
   return (
     <>
       {typeof imageBox === "string" && (
         <Lightbox mainSrc={imageBox} onCloseRequest={() => setImageBox(null)} />
       )}
-      <section className="bg-white py-8">
+      <section className=" py-8" id="sneaker-section">
         <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">
           <nav id="store" className="w-full z-30 top-0 px-6 py-1">
             <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
               <a
-                className="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl "
+                className="uppercase tracking-wide no-underline hover:no-underline font-bold text-white-800 text-xl "
                 href="#"
               >
                 Store
@@ -70,23 +71,33 @@ const List = () => {
           {data &&
             data?.sneakers.map((sneaker: any) => (
               <div
+              id="sneaker"
                 key={sneaker._id}
                 className="transition ease-in duration-200 hover:scale-105 shadow-md cursor-pointer card flex flex-col justify-center elative group  mx-2 mb-4 p-4 bg-white rounded-lg "
-                style={{ width: "23%" }}
               >
                 <div>
                   <img
                     onClick={() => setImageBox(sneaker.image)}
                     src={sneaker.image}
-                    className="w-full h-60 object-contain "
+                    className="w-full h-60 object-contain rounded-xl "
                   />
                 </div>
                 <hr/>
                 <div>
-                <p className="font-sans font-semibold text-md text-neutral-900 mt-1">{sneaker.name}</p>
-                  <div className="flex flex-col md:flex-row justify-between items-center text-blue-400 mt-1">
-                    <p className="font-sans font-semibold text-md">  ${sneaker.price}</p>
-                    <button className="text-neutral-900 font-semibold border-2 rounded-md py-2 px-4 text-sm"   onClick={() => AddToCartShop(sneaker)}>Add Cart</button>
+                  <p className="font-sans font-semibold text-md text-neutral-900 mt-1">
+                    {sneaker.name}
+                  </p>
+                  <div className="flex flex-col md:flex-row justify-between items-center text-neutral-600 ">
+                    <p className="font-sans font-semibold text-md">
+                      {" "}
+                      ${sneaker.price}
+                    </p>
+                    <button
+                      className="text-white font-semibold  rounded-md py-2 px-4 text-sm sneaker-btn"
+                      onClick={() => AddToCartShop(sneaker)}
+                    >
+                      Add Cart
+                    </button>
                   </div>
                 </div>
               </div>

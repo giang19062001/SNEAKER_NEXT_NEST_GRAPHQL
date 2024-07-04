@@ -1,8 +1,10 @@
+import { AppDispatch, store } from './../../../redux/store';
 const { default: NextAuth } = require("next-auth/next");
 import GoogleProvider from "next-auth/providers/google";
-import CredentialsProvider from "next-auth/providers/credentials";
 import { getClient } from "@/app/apollo/client";
-import { ADD_USERS, GET_USER } from "@/app/graphql/user";
+import { GET_USER } from "@/app/graphql/user";
+import { addUser } from "@/app/redux/auth/auth.Thunk";
+import { AddUserDto } from "@/app/types/user";
 
 const handler = NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
@@ -22,15 +24,14 @@ const handler = NextAuth({
   callbacks: {
     async signIn(user: any) {
       if (user.account.provider == "google") {
-        const client = getClient();
-        await client.mutate({
-          mutation: ADD_USERS,
-          variables: {
-            name: user.user.name,
-            email: user.user.email,
-            provider: "google",
-          },
-        });
+        const userDto : AddUserDto = {
+          name: user.user.name,
+          email: user.user.email,
+          provider: "google",
+        }
+
+        await store.dispatch(addUser(userDto));
+
         return true;
       }
     },

@@ -1,20 +1,6 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
-
-
-@InputType()
-export class UserInput {
-  @Field()
-  name: string;
-
-  @Field()
-  email: string;
-  
-  @Field()
-  provider: string;
-  
-}
+import { Document } from 'mongoose'
 
 @ObjectType()
 @Schema()

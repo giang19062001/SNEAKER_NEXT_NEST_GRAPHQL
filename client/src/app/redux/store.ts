@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import orderSlice from './order/order.Slice'
 import logger from 'redux-logger'
+import authSlide from './auth/auth.Slide'
 
 const persistConfig = {
   key: 'persist',
@@ -11,6 +12,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   order: orderSlice,
+  auth: authSlide
 })
 
 const makeConfiguredStore = () =>
@@ -40,3 +42,4 @@ export const makeStore = () => {
 export type AppStore = ReturnType<typeof makeStore>
 export type RootState = ReturnType<AppStore['getState']>
 export type AppDispatch = AppStore['dispatch']
+export const store = makeStore()

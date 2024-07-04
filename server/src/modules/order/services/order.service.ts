@@ -12,5 +12,9 @@ export class OrderService {
   async findAll(): Promise<Order[]> {
     return this.orderModel.find().exec();
   }
+
+  async findOrderByUser(userId: string): Promise<Order[]> {
+    return this.orderModel.find({user: userId}).exec();
+  }
   
 }
